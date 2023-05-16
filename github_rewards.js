@@ -37,6 +37,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var apiRequests = require("./apirequests");
+var generateBanner = require("./generate_banner");
+var dataOfInterest = {
+    username: "",
+    repositoryCount: 0,
+    totalIssueCount: 0,
+    totalPullRequestCount: 0,
+    totalCommitCount: 0,
+    maxCommitCount: 0,
+    maxIssueCount: 0,
+    maxPullRequestCount: 0
+};
 main();
 function main() {
     return __awaiter(this, void 0, void 0, function () {
@@ -44,7 +55,8 @@ function main() {
             switch (_a.label) {
                 case 0:
                     if (!(process.env.ACCESS_TOKEN && process.env.GITHUB_ACTOR)) return [3 /*break*/, 4];
-                    return [4 /*yield*/, apiRequests.init()];
+                    dataOfInterest.username = process.env.GITHUB_ACTOR;
+                    return [4 /*yield*/, apiRequests.init(dataOfInterest)];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, apiRequests.repositoriesContributedTo()];
@@ -53,6 +65,7 @@ function main() {
                     return [4 /*yield*/, apiRequests.getCounts()];
                 case 3:
                     _a.sent();
+                    generateBanner.generateBanner(dataOfInterest);
                     return [3 /*break*/, 5];
                 case 4: throw new Error("ACCESS_TOKEN and GITHUB_ACTOR must be set");
                 case 5: return [2 /*return*/];
