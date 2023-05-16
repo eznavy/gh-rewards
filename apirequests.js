@@ -39,16 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCounts = exports.repositoriesContributedTo = exports.init = void 0;
 var rest_1 = require("@octokit/rest");
 var graphql = require("@octokit/graphql").graphql;
-var dataOfInterest = {
-    repositoryCount: 0,
-    totalIssueCount: 0,
-    totalPullRequestCount: 0,
-    totalCommitCount: 0,
-    maxCommitCount: 0,
-    maxIssueCount: 0,
-    maxPullRequestCount: 0
-};
-//TODO: assure that the counts returned by these requests do not include contributions to private repos
+var dataOfInterest;
 var queryPresets = {
     commitCount: "\n        repository(owner: \"OWNER_NAME\", name: \"REPO_NAME\") {\n            defaultBranchRef {\n                target {\n                    ... on Commit {\n                        history(author: { id: \"NODE_ID\" }) {\n                            totalCount\n                        }\n                    }\n                }\n            }\n        }\n    ",
     issueCount: "\n        search(query: \"repo:OWNER_NAME/REPO_NAME type:issue author:USER_NAME\", type: ISSUE) {\n            issueCount\n        }\n    ",
@@ -58,7 +49,7 @@ var user, node_id, token, repos = [];
 /**
  * Initialize the variables user, token and node_id.
  */
-function init() {
+function init(data) {
     return __awaiter(this, void 0, void 0, function () {
         var octokit;
         return __generator(this, function (_a) {
@@ -66,6 +57,7 @@ function init() {
                 case 0:
                     user = process.env.GITHUB_ACTOR;
                     token = process.env.ACCESS_TOKEN;
+                    dataOfInterest = data;
                     octokit = new rest_1.Octokit({
                         auth: token
                     });
@@ -91,26 +83,26 @@ function repositoriesContributedTo() {
                 case 0:
                     after = null;
                     hasNextPage = false;
-                    query = "\n        query {\n            user(login: \"".concat(user, "\") {\n                repositoriesContributedTo(first: 100, includeUserRepositories: true, after: ").concat(after, ", contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, PULL_REQUEST_REVIEW]) {\n                    nodes {\n                        name\n                        owner {\n                            login\n                        }\n                   }\n                   pageInfo {\n                        endCursor\n                        hasNextPage\n                   } \n                }\n            }\n        }\n    ");
                     _a.label = 1;
-                case 1: return [4 /*yield*/, graphql(query, {
-                        headers: {
-                            authorization: "Bearer ".concat(token)
-                        }
-                    }).then(function (result) {
-                        result.user.repositoriesContributedTo.nodes.forEach(function (repo) {
-                            if (repo !== null)
-                                repos.push({ owner: repo.owner.login, name: repo.name }); //private repos are listed as null in the response
-                        });
-                        dataOfInterest.repositoryCount = repos.length;
-                        //TODO: test pagination
-                        if (result.user.repositoriesContributedTo.pageInfo.hasNextPage) {
-                            hasNextPage = true;
-                            after = result.user.repositoriesContributedTo.pageInfo.endCursor;
-                        }
-                        else
-                            hasNextPage = false;
-                    })];
+                case 1:
+                    query = "\n            query {\n                user(login: \"".concat(user, "\") {\n                    repositoriesContributedTo(first: 100, includeUserRepositories: true, after: ").concat(after, ", contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, PULL_REQUEST_REVIEW, REPOSITORY]) {\n                        nodes {\n                            name\n                            owner {\n                                login\n                            }\n                       }\n                       pageInfo {\n                            endCursor\n                            hasNextPage\n                       } \n                    }\n                }\n            }\n        ");
+                    return [4 /*yield*/, graphql(query, {
+                            headers: {
+                                authorization: "Bearer ".concat(token)
+                            }
+                        }).then(function (result) {
+                            result.user.repositoriesContributedTo.nodes.forEach(function (repo) {
+                                if (repo !== null)
+                                    repos.push({ owner: repo.owner.login, name: repo.name }); //private repos are listed as null in the response
+                            });
+                            dataOfInterest.repositoryCount = repos.length;
+                            if (result.user.repositoriesContributedTo.pageInfo.hasNextPage) {
+                                hasNextPage = true;
+                                after = JSON.stringify(result.user.repositoriesContributedTo.pageInfo.endCursor);
+                            }
+                            else
+                                hasNextPage = false;
+                        })];
                 case 2:
                     _a.sent();
                     _a.label = 3;
@@ -150,7 +142,7 @@ function getCounts() {
                                             countPreset = queryPresets.pullRequestCount;
                                             break;
                                         default:
-                                            countPreset = "";
+                                            throw new Error("Invalid count type");
                                     }
                                     repos.forEach(function (repo) {
                                         repo.label = "".concat(repo.owner).concat(repo.name).replace(/[^a-zA-Z0-9_]/g, "");
@@ -192,6 +184,8 @@ function getCounts() {
                                                     });
                                                     dataOfInterest.maxPullRequestCount = max;
                                                     break;
+                                                default:
+                                                    throw new Error("Invalid count type");
                                             }
                                         })];
                                 case 1:
