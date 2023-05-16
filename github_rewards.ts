@@ -21,8 +21,6 @@ async function main() {
         await apiRequests.init(dataOfInterest);
         await apiRequests.repositoriesContributedTo();
         await apiRequests.getCounts();
-
-        //generate banner
         generateBanner.generateBanner(dataOfInterest);
     } else {
         throw new Error("ACCESS_TOKEN and GITHUB_ACTOR must be set");
