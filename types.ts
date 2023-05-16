@@ -1,4 +1,5 @@
 export type DataOfInterest = {
+    username: string;
     repositoryCount: number;
     totalIssueCount: number;
     totalPullRequestCount: number;

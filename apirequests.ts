@@ -4,17 +4,8 @@ import { Repository, DataOfInterest } from "./types";
 const {graphql} = require("@octokit/graphql");
 
 
-let dataOfInterest: DataOfInterest = {
-    repositoryCount: 0,
-    totalIssueCount: 0,
-    totalPullRequestCount: 0,
-    totalCommitCount: 0,
-    maxCommitCount: 0,
-    maxIssueCount: 0,
-    maxPullRequestCount: 0
-};
+let dataOfInterest: DataOfInterest;
 
-//TODO: assure that the counts returned by these requests do not include contributions to private repos
 let queryPresets = {
     commitCount: `
         repository(owner: "OWNER_NAME", name: "REPO_NAME") {
@@ -46,9 +37,10 @@ let user: string, node_id: string, token: string, repos: Repository[] = [];
 /**
  * Initialize the variables user, token and node_id.
  */
-export async function init() {
+export async function init(data: DataOfInterest) {
     user = process.env.GITHUB_ACTOR;
     token = process.env.ACCESS_TOKEN;
+    dataOfInterest = data;
 
     const octokit = new Octokit({
         auth: token
