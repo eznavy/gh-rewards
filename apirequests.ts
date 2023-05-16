@@ -64,26 +64,26 @@ export async function init() {
 export async function repositoriesContributedTo() {
     let after = null;
     let hasNextPage = false;
-    let query = `
-        query {
-            user(login: "${user}") {
-                repositoriesContributedTo(first: 100, includeUserRepositories: true, after: ${after}, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, PULL_REQUEST_REVIEW]) {
-                    nodes {
-                        name
-                        owner {
-                            login
-                        }
-                   }
-                   pageInfo {
-                        endCursor
-                        hasNextPage
-                   } 
-                }
-            }
-        }
-    `;
 
     do {
+        let query = `
+            query {
+                user(login: "${user}") {
+                    repositoriesContributedTo(first: 100, includeUserRepositories: true, after: ${after}, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, PULL_REQUEST_REVIEW, REPOSITORY]) {
+                        nodes {
+                            name
+                            owner {
+                                login
+                            }
+                       }
+                       pageInfo {
+                            endCursor
+                            hasNextPage
+                       } 
+                    }
+                }
+            }
+        `;
         await graphql(query, {
             headers: {
                 authorization: `Bearer ${token}`
@@ -93,10 +93,9 @@ export async function repositoriesContributedTo() {
                 if(repo !== null) repos.push({owner: repo.owner.login, name: repo.name}); //private repos are listed as null in the response
             });
             dataOfInterest.repositoryCount = repos.length;
-            //TODO: test pagination
             if(result.user.repositoriesContributedTo.pageInfo.hasNextPage) {
                 hasNextPage = true;
-                after = result.user.repositoriesContributedTo.pageInfo.endCursor;
+                after = JSON.stringify(result.user.repositoriesContributedTo.pageInfo.endCursor);
             }
             else hasNextPage = false;
         });
@@ -124,7 +123,7 @@ export async function getCounts() {
                 countPreset = queryPresets.pullRequestCount;
                 break;
             default:
-                countPreset = "";
+                throw new Error("Invalid count type");
         }
 
         repos.forEach((repo: Repository) => {
@@ -165,6 +164,8 @@ export async function getCounts() {
                     });
                     dataOfInterest.maxPullRequestCount = max;
                     break;
+                default:
+                    throw new Error("Invalid count type");
             }
         });
     }
