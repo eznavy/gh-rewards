@@ -15,5 +15,5 @@ export function generateBanner(dataOfInterest: DataOfInterest) {
     banner = banner.replace(/{{maxIssueCount}}/g, dataOfInterest.maxIssueCount.toString());
     banner = banner.replace(/{{maxPullRequestCount}}/g, dataOfInterest.maxPullRequestCount.toString());
 
-    require("fs").writeFileSync("./overview.svg", banner);
+    require("fs").writeFileSync("./generated/overview.svg", banner);
 }
