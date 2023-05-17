@@ -109,7 +109,9 @@ function repositoriesContributedTo() {
                 case 3:
                     if (hasNextPage) return [3 /*break*/, 1];
                     _a.label = 4;
-                case 4: return [2 /*return*/];
+                case 4:
+                    console.log('Found the following repositories:', repos);
+                    return [2 /*return*/];
             }
         });
     });
@@ -207,7 +209,9 @@ function getCounts() {
                 case 3:
                     _i++;
                     return [3 /*break*/, 1];
-                case 4: return [2 /*return*/];
+                case 4:
+                    console.log('Found the following counts:', dataOfInterest);
+                    return [2 /*return*/];
             }
         });
     });

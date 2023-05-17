@@ -38,6 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var apiRequests = require("./apirequests");
 var generateBanner = require("./generate_banner");
+if (!process.env.GITHUB_ACTIONS)
+    require('dotenv').config();
 var dataOfInterest = {
     username: "",
     repositoryCount: 0,
@@ -56,6 +58,7 @@ function main() {
                 case 0:
                     if (!(process.env.ACCESS_TOKEN && process.env.GITHUB_ACTOR)) return [3 /*break*/, 4];
                     dataOfInterest.username = process.env.GITHUB_ACTOR;
+                    console.log("Starting to fetch data...");
                     return [4 /*yield*/, apiRequests.init(dataOfInterest)];
                 case 1:
                     _a.sent();
