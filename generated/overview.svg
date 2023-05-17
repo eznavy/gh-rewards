@@ -1,4 +1,4 @@
-<svg id="gh-dark-mode-only" width="360" height="210" xmlns="http://www.w3.org/2000/svg">
+<svg id="gh-dark-mode-only" width="600" height="300" xmlns="http://www.w3.org/2000/svg">
   <style>
 svg {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
@@ -88,7 +88,7 @@ tr {
             <thead>
               <tr style="transform: translateX(0);">
                 <th colspan="2">
-                  {{ username }}'s GitHub Statistics
+                  eznavy's GitHub Statistics
                 </th>
               </tr>
             </thead>
@@ -102,7 +102,7 @@ tr {
                   Repositories contributed to
                 </td>
                 <td>
-                  {{ totalRepositories }}
+                  5
                 </td>
               </tr>
 
@@ -115,7 +115,7 @@ tr {
                   Total issues created
                 </td>
                 <td>
-                  {{ totalIssues }}
+                  48
                 </td>
               </tr>
 
@@ -128,7 +128,7 @@ tr {
                   Maximum amount of issues created in a single repository
                 </td>
                 <td>
-                  {{ maxIssues }}
+                  47
                 </td>
               </tr>
 
@@ -141,7 +141,7 @@ tr {
                   Total commits created
                 </td>
                 <td>
-                  {{ totalCommits }}
+                  193
                 </td>
               </tr>
 
@@ -154,7 +154,7 @@ tr {
                   Maximum amount of commits created in a single repository
                 </td>
                 <td>
-                  {{ maxCommits }}
+                  114
                 </td>
               </tr>
 
@@ -167,7 +167,7 @@ tr {
                   Total Pull Requests created
                 </td>
                 <td>
-                  {{ totalPullRequests }}
+                  37
                 </td>
               </tr>
 
@@ -180,7 +180,7 @@ tr {
                   Maximum amount of Pull Requests in a single repository
                 </td>
                 <td>
-                  {{ maxPullRequests }}
+                  37
                 </td>
               </tr>
             </tbody>

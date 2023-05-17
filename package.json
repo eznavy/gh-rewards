@@ -4,13 +4,17 @@
   "description": "Rewards for contributions to public repositories on GitHub for your profile.",
   "main": "github_rewards.ts",
   "scripts": {
-    "build": "tsc github_rewards.ts",
+    "build": "tsc *.ts",
     "start": "node github_rewards.js"
   },
   "author": "eznavy",
   "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^19.0.8",
-    "octokit": "^2.0.14"
+    "octokit": "^2.0.14",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
   }
 }

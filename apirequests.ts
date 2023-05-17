@@ -93,6 +93,7 @@ export async function repositoriesContributedTo() {
         });
     }
     while(hasNextPage);
+    console.log('Found the following repositories:', repos)
 }
 
 /**
@@ -161,4 +162,5 @@ export async function getCounts() {
             }
         });
     }
+    console.log('Found the following counts:', dataOfInterest)
 }
