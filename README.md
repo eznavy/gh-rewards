@@ -1,7 +1,7 @@
 # Rewards for GitHub Contributions
 
 ## Description
-![Example image of a generated achievement banner](https://github.com/eznavy/gh-rewards/tree/master/generated/overview.svg)
+![Example image of a generated achievement banner](https://github.com/eznavy/gh-rewards/blob/master/generated/overview.svg)
 
 This project uses [GitHub Actions](https://github.com/features/actions) to generate achievements to display on your GitHub profile.
 The achievements are calculated based on your GitHub contributions and are updated daily. 
