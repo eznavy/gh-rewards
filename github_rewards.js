@@ -36,12 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.dataOfInterest = void 0;
 var apiRequests = require("./apirequests");
 var generateBanner = require("./generate_banner");
 if (!process.env.GITHUB_ACTIONS)
     require('dotenv').config();
-var dataOfInterest = {
+exports.dataOfInterest = {
     username: "",
+    totalContributionCount: 0,
     repositoryCount: 0,
     totalIssueCount: 0,
     totalPullRequestCount: 0,
@@ -57,9 +59,9 @@ function main() {
             switch (_a.label) {
                 case 0:
                     if (!(process.env.ACCESS_TOKEN && process.env.GITHUB_ACTOR)) return [3 /*break*/, 4];
-                    dataOfInterest.username = process.env.GITHUB_ACTOR;
+                    exports.dataOfInterest.username = process.env.GITHUB_ACTOR;
                     console.log("Starting to fetch data...");
-                    return [4 /*yield*/, apiRequests.init(dataOfInterest)];
+                    return [4 /*yield*/, apiRequests.init()];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, apiRequests.repositoriesContributedTo()];
@@ -68,7 +70,7 @@ function main() {
                     return [4 /*yield*/, apiRequests.getCounts()];
                 case 3:
                     _a.sent();
-                    generateBanner.generateBanner(dataOfInterest);
+                    generateBanner.generateBanner();
                     return [3 /*break*/, 5];
                 case 4: throw new Error("ACCESS_TOKEN and GITHUB_ACTOR must be set");
                 case 5: return [2 /*return*/];

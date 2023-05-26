@@ -38,8 +38,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCounts = exports.repositoriesContributedTo = exports.init = void 0;
 var rest_1 = require("@octokit/rest");
+var github_rewards_1 = require("./github_rewards");
 var graphql = require("@octokit/graphql").graphql;
-var dataOfInterest;
 var queryPresets = {
     commitCount: "\n        repository(owner: \"OWNER_NAME\", name: \"REPO_NAME\") {\n            defaultBranchRef {\n                target {\n                    ... on Commit {\n                        history(author: { id: \"NODE_ID\" }) {\n                            totalCount\n                        }\n                    }\n                }\n            }\n        }\n    ",
     issueCount: "\n        search(query: \"repo:OWNER_NAME/REPO_NAME type:issue author:USER_NAME\", type: ISSUE) {\n            issueCount\n        }\n    ",
@@ -49,7 +49,7 @@ var user, node_id, token, repos = [];
 /**
  * Initialize the variables user, token and node_id.
  */
-function init(data) {
+function init() {
     return __awaiter(this, void 0, void 0, function () {
         var octokit;
         return __generator(this, function (_a) {
@@ -57,7 +57,6 @@ function init(data) {
                 case 0:
                     user = process.env.GITHUB_ACTOR;
                     token = process.env.ACCESS_TOKEN;
-                    dataOfInterest = data;
                     octokit = new rest_1.Octokit({
                         auth: token
                     });
@@ -95,7 +94,7 @@ function repositoriesContributedTo() {
                                 if (repo !== null)
                                     repos.push({ owner: repo.owner.login, name: repo.name }); //private repos are listed as null in the response
                             });
-                            dataOfInterest.repositoryCount = repos.length;
+                            github_rewards_1.dataOfInterest.repositoryCount = repos.length;
                             if (result.user.repositoriesContributedTo.pageInfo.hasNextPage) {
                                 hasNextPage = true;
                                 after = JSON.stringify(result.user.repositoriesContributedTo.pageInfo.endCursor);
@@ -164,27 +163,27 @@ function getCounts() {
                                                         var count = result[repo.label].defaultBranchRef.target.history.totalCount;
                                                         if (count > max)
                                                             max = count;
-                                                        dataOfInterest.totalCommitCount += count;
+                                                        github_rewards_1.dataOfInterest.totalCommitCount += count;
                                                     });
-                                                    dataOfInterest.maxCommitCount = max;
+                                                    github_rewards_1.dataOfInterest.maxCommitCount = max;
                                                     break;
                                                 case "issue":
                                                     repos.forEach(function (repo) {
                                                         var count = result[repo.label].issueCount;
                                                         if (count > max)
                                                             max = count;
-                                                        dataOfInterest.totalIssueCount += count;
+                                                        github_rewards_1.dataOfInterest.totalIssueCount += count;
                                                     });
-                                                    dataOfInterest.maxIssueCount = max;
+                                                    github_rewards_1.dataOfInterest.maxIssueCount = max;
                                                     break;
                                                 case "pullRequest":
                                                     repos.forEach(function (repo) {
                                                         var count = result[repo.label].issueCount;
                                                         if (count > max)
                                                             max = count;
-                                                        dataOfInterest.totalPullRequestCount += count;
+                                                        github_rewards_1.dataOfInterest.totalPullRequestCount += count;
                                                     });
-                                                    dataOfInterest.maxPullRequestCount = max;
+                                                    github_rewards_1.dataOfInterest.maxPullRequestCount = max;
                                                     break;
                                                 default:
                                                     throw new Error("Invalid count type");
@@ -210,7 +209,8 @@ function getCounts() {
                     _i++;
                     return [3 /*break*/, 1];
                 case 4:
-                    console.log('Found the following counts:', dataOfInterest);
+                    github_rewards_1.dataOfInterest.totalContributionCount = github_rewards_1.dataOfInterest.totalCommitCount + github_rewards_1.dataOfInterest.totalIssueCount + github_rewards_1.dataOfInterest.totalPullRequestCount;
+                    console.log('Found the following counts:', github_rewards_1.dataOfInterest);
                     return [2 /*return*/];
             }
         });
