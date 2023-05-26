@@ -74,6 +74,7 @@
     h4 {
     color: rgb(3, 102, 214);
     font-weight: bold;
+    font-size: 22px;
     }
 
     h5 {
@@ -119,10 +120,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Collaborative Spirit.svg" alt="Collaborative Spirit" />
+            <img class="split-image" src="./images/Collaborative Spirit.svg" alt="Collaborative Spirit V" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Collaborative Spirit</span>
+            <span class="achievement_title">Collaborative Spirit V</span>
             <span class="achievement_description">Have created 25 pull requests in total</span>
             <span class="next">Next milestone: 50</span>
           </div>
@@ -132,10 +133,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Merge Enthusiast.svg" alt="Merge Enthusiast" />
+            <img class="split-image" src="./images/Merge Enthusiast.svg" alt="Merge Enthusiast V" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Merge Enthusiast</span>
+            <span class="achievement_title">Merge Enthusiast V</span>
             <span class="achievement_description">Have created 25 pull requests in a single repository</span>
             <span class="next">Next milestone: 50</span>
           </div>
@@ -145,10 +146,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Troubleshooter.svg" alt="Troubleshooter" />
+            <img class="split-image" src="./images/Troubleshooter.svg" alt="Troubleshooter V" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Troubleshooter</span>
+            <span class="achievement_title">Troubleshooter V</span>
             <span class="achievement_description">Have created 25 issues in total</span>
             <span class="next">Next milestone: 50</span>
           </div>
@@ -158,10 +159,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Issue Opener.svg" alt="Issue Opener" />
+            <img class="split-image" src="./images/Issue Opener.svg" alt="Issue Opener V" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Issue Opener</span>
+            <span class="achievement_title">Issue Opener V</span>
             <span class="achievement_description">Have created 25 issues in a single repository</span>
             <span class="next">Next milestone: 50</span>
           </div>
@@ -171,10 +172,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Contributor.svg" alt="Contributor" />
+            <img class="split-image" src="./images/Contributor.svg" alt="Contributor VII" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Contributor</span>
+            <span class="achievement_title">Contributor VII</span>
             <span class="achievement_description">Have created 100 commits in total</span>
             <span class="next">Next milestone: 250</span>
           </div>
@@ -184,10 +185,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Committed Developer.svg" alt="Committed Developer" />
+            <img class="split-image" src="./images/Committed Developer.svg" alt="Committed Developer VII" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Committed Developer</span>
+            <span class="achievement_title">Committed Developer VII</span>
             <span class="achievement_description">Have created 100 commits in a single repository</span>
             <span class="next">Next milestone: 250</span>
           </div>
@@ -197,10 +198,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Repository Explorer.svg" alt="Repository Explorer" />
+            <img class="split-image" src="./images/Repository Explorer.svg" alt="Repository Explorer III" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Repository Explorer</span>
+            <span class="achievement_title">Repository Explorer III</span>
             <span class="achievement_description">Have contributed to 5 repositories</span>
             <span class="next">Next milestone: 10</span>
           </div>
@@ -210,10 +211,10 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Influencer.svg" alt="Influencer" />
+            <img class="split-image" src="./images/Influencer.svg" alt="Influencer VIII" />
           </div>
           <div class="split-right">
-            <span class="achievement_title">Influencer</span>
+            <span class="achievement_title">Influencer VIII</span>
             <span class="achievement_description">Have 250 contributions in total</span>
             <span class="next">Next milestone: 500</span>
           </div>

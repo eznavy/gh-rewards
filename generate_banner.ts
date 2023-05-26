@@ -17,7 +17,7 @@ let achievement_template = `
       </div>
 `;
 
-let milestones: number[] = [1000, 500, 250, 100, 50, 25, 10, 5, 2, 1];
+let milestones: number[] = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
 
 
 /**
@@ -62,12 +62,14 @@ export function generateBanner() {
     //write the achievements to the banner
     let allAchievements = "";
     let achievementCount = 0;
+    let roman_numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
     achievements.forEach((achievement: Achievement) => {
         let achievement_string = achievement_template;
         if(achievement.amount !== 0) {
             achievementCount++;
             achievement_string = achievement_string.replace(/{{ src }}/g, `./images/${achievement.title}.svg`);
-            achievement_string = achievement_string.replace(/{{ achievement_title }}/g, achievement.title);
+            let roman_numeral = roman_numerals[milestones.indexOf(achievement.amount)];
+            achievement_string = achievement_string.replace(/{{ achievement_title }}/g, `${achievement.title} ${roman_numeral}`);
             achievement_string = achievement_string.replace(/{{ achievement_description }}/g, achievement.description.replace(/{{ amount }}/g, achievement.amount.toString()));
             achievement_string = achievement_string.replace(/{{ achievement_next }}/g, achievement.next.toString());
             allAchievements += achievement_string;
@@ -85,9 +87,9 @@ export function generateBanner() {
 function setAmountAndNext(achievement: Achievement, amount: number) {
     if(amount == 0) return;
     for(let i = 0; i < milestones.length; i++) {
-        if(milestones[i] <= amount) {
-            achievement.amount = milestones[i];
-            achievement.next = milestones[i-1];
+        if(milestones[i] > amount) {
+            achievement.amount = milestones[i-1];
+            achievement.next = milestones[i];
             break;
         }
     }
