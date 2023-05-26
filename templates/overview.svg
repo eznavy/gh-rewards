@@ -93,6 +93,12 @@
     display: inline-block;
     }
 
+    .title {
+    color: rgb(3, 102, 214);
+    font-size: 19px;
+    padding-bottom: 10px;
+    }
+
   </style>
   <g>
     <rect x="5" y="5" id="background" />
