@@ -93,16 +93,6 @@
     display: inline-block;
     }
 
-    .title {
-    color: rgb(3, 102, 214);
-    font-size: 19px;
-    padding-bottom: 10px;
-    }
-
-    .title_desc {
-    font-size: 17px;
-    }
-
   </style>
   <g>
     <rect x="5" y="5" id="background" />
@@ -111,9 +101,6 @@
         <div xmlns="http://www.w3.org/1999/xhtml">
           <h4>{{ username }}'s Contribution Rewards</h4>
           <div class="content">
-            <span class="title">Current Title: </span>
-            <span class="title_desc">Intermediate Contributor</span>
-            <br /><br />
             <div class="title">Achievements:</div>
             <div class="grid-container">
               {{ achievements }}

@@ -29,19 +29,11 @@ jobs:
     - name: Build
       run: npm run build
 
-  run:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Run
       run: npm start
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-  finish:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Delete generated .js before committing
       run: find . -type f -name "*.js" -delete
 
