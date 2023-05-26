@@ -4,8 +4,9 @@ import {DataOfInterest} from "./types";
 
 if(!process.env.GITHUB_ACTIONS) require('dotenv').config();
 
-let dataOfInterest: DataOfInterest = {
+export let dataOfInterest: DataOfInterest = {
     username: "",
+    totalContributionCount: 0,
     repositoryCount: 0,
     totalIssueCount: 0,
     totalPullRequestCount: 0,
@@ -21,10 +22,10 @@ async function main() {
     if(process.env.ACCESS_TOKEN && process.env.GITHUB_ACTOR) {
         dataOfInterest.username = process.env.GITHUB_ACTOR;
         console.log("Starting to fetch data...")
-        await apiRequests.init(dataOfInterest);
+        await apiRequests.init();
         await apiRequests.repositoriesContributedTo();
         await apiRequests.getCounts();
-        generateBanner.generateBanner(dataOfInterest);
+        generateBanner.generateBanner();
     } else {
         throw new Error("ACCESS_TOKEN and GITHUB_ACTOR must be set");
     }

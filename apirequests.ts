@@ -1,10 +1,8 @@
 import {Octokit} from "@octokit/rest";
-import { Repository, DataOfInterest } from "./types";
+import { Repository } from "./types";
+import {dataOfInterest} from "./github_rewards";
 
 const {graphql} = require("@octokit/graphql");
-
-
-let dataOfInterest: DataOfInterest;
 
 let queryPresets = {
     commitCount: `
@@ -37,10 +35,9 @@ let user: string, node_id: string, token: string, repos: Repository[] = [];
 /**
  * Initialize the variables user, token and node_id.
  */
-export async function init(data: DataOfInterest) {
+export async function init() {
     user = process.env.GITHUB_ACTOR;
     token = process.env.ACCESS_TOKEN;
-    dataOfInterest = data;
 
     const octokit = new Octokit({
         auth: token
@@ -162,5 +159,6 @@ export async function getCounts() {
             }
         });
     }
+    dataOfInterest.totalContributionCount = dataOfInterest.totalCommitCount + dataOfInterest.totalIssueCount + dataOfInterest.totalPullRequestCount;
     console.log('Found the following counts:', dataOfInterest)
 }
