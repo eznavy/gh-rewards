@@ -52,6 +52,7 @@
     display: flex;
     align-items: center; /* Center the image vertically */
     justify-content: center; /* Center the image horizontally */
+    position: relative;
     }
 
     .split-right {
@@ -97,6 +98,10 @@
     color: rgb(3, 102, 214);
     font-size: 19px;
     padding-bottom: 10px;
+    }
+
+    .number {
+      position: absolute;
     }
 
   </style>

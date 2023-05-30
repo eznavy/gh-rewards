@@ -6,7 +6,8 @@ let achievement_template = `
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="{{ src }}" alt="{{ achievement_title }}" />
+            <img class="split-image" src="{{ badge_src }}" alt="{{ achievement_title }}" />
+            <img class="split-image number" src="{{ milestone_src }}" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">{{ achievement_title }}</span>
@@ -67,8 +68,9 @@ export function generateBanner() {
         let achievement_string = achievement_template;
         if(achievement.amount !== 0) {
             achievementCount++;
-            achievement_string = achievement_string.replace(/{{ src }}/g, `./images/${achievement.title}.svg`);
+            achievement_string = achievement_string.replace(/{{ badge_src }}/g, `../assets/${achievement.badge}.png`);
             let roman_numeral = roman_numerals[milestones.indexOf(achievement.amount)];
+            achievement_string = achievement_string.replace(/{{ milestone_src }}/g, `../assets/${roman_numeral.toLowerCase()}.png`);
             achievement_string = achievement_string.replace(/{{ achievement_title }}/g, `${achievement.title} ${roman_numeral}`);
             achievement_string = achievement_string.replace(/{{ achievement_description }}/g, achievement.description.replace(/{{ amount }}/g, achievement.amount.toString()));
             achievement_string = achievement_string.replace(/{{ achievement_next }}/g, achievement.next.toString());

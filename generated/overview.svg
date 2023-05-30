@@ -52,6 +52,7 @@
     display: flex;
     align-items: center; /* Center the image vertically */
     justify-content: center; /* Center the image horizontally */
+    position: relative;
     }
 
     .split-right {
@@ -93,6 +94,16 @@
     display: inline-block;
     }
 
+    .title {
+    color: rgb(3, 102, 214);
+    font-size: 19px;
+    padding-bottom: 10px;
+    }
+
+    .number {
+      position: absolute;
+    }
+
   </style>
   <g>
     <rect x="5" y="5" id="background" />
@@ -107,7 +118,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Collaborative Spirit.svg" alt="Collaborative Spirit V" />
+            <img class="split-image" src="../assets/badge_2.png" alt="Collaborative Spirit V" />
+            <img class="split-image number" src="../assets/v.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Collaborative Spirit V</span>
@@ -120,7 +132,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Merge Enthusiast.svg" alt="Merge Enthusiast V" />
+            <img class="split-image" src="../assets/badge_2.png" alt="Merge Enthusiast V" />
+            <img class="split-image number" src="../assets/v.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Merge Enthusiast V</span>
@@ -133,7 +146,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Troubleshooter.svg" alt="Troubleshooter V" />
+            <img class="split-image" src="../assets/badge_1.png" alt="Troubleshooter V" />
+            <img class="split-image number" src="../assets/v.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Troubleshooter V</span>
@@ -146,7 +160,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Issue Opener.svg" alt="Issue Opener V" />
+            <img class="split-image" src="../assets/badge_1.png" alt="Issue Opener V" />
+            <img class="split-image number" src="../assets/v.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Issue Opener V</span>
@@ -159,7 +174,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Contributor.svg" alt="Contributor VII" />
+            <img class="split-image" src="../assets/badge_3.png" alt="Contributor VII" />
+            <img class="split-image number" src="../assets/vii.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Contributor VII</span>
@@ -172,7 +188,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Committed Developer.svg" alt="Committed Developer VII" />
+            <img class="split-image" src="../assets/badge_3.png" alt="Committed Developer VII" />
+            <img class="split-image number" src="../assets/vii.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Committed Developer VII</span>
@@ -185,7 +202,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Repository Explorer.svg" alt="Repository Explorer III" />
+            <img class="split-image" src="../assets/badge_4.png" alt="Repository Explorer III" />
+            <img class="split-image number" src="../assets/iii.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Repository Explorer III</span>
@@ -198,7 +216,8 @@
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="./images/Influencer.svg" alt="Influencer VIII" />
+            <img class="split-image" src="../assets/badge_5.png" alt="Influencer VIII" />
+            <img class="split-image number" src="../assets/viii.png" alt="{{ achievement_milestone }}" />
           </div>
           <div class="split-right">
             <span class="achievement_title">Influencer VIII</span>

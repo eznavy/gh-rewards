@@ -19,6 +19,7 @@ export type Repository = {
 export type Achievement = {
     title: string;
     description: string;
+    badge: string;
     amount: number;
     next: number;
 }
@@ -28,6 +29,7 @@ export let achievements: Achievement[] = [
     {
         title: "Collaborative Spirit",
         description: "Have created {{ amount }} pull requests in total",
+        badge: "badge_2",
         amount: 0,
         next: 0
     },
@@ -35,6 +37,7 @@ export let achievements: Achievement[] = [
     {
         title: "Merge Enthusiast",
         description: "Have created {{ amount }} pull requests in a single repository",
+        badge: "badge_2",
         amount: 0,
         next: 0
     },
@@ -42,6 +45,7 @@ export let achievements: Achievement[] = [
     {
         title: "Troubleshooter",
         description: "Have created {{ amount }} issues in total",
+        badge: "badge_1",
         amount: 0,
         next: 0
     },
@@ -49,6 +53,7 @@ export let achievements: Achievement[] = [
     {
         title: "Issue Opener",
         description: "Have created {{ amount }} issues in a single repository",
+        badge: "badge_1",
         amount: 0,
         next: 0
     },
@@ -56,6 +61,7 @@ export let achievements: Achievement[] = [
     {
         title: "Contributor",
         description: "Have created {{ amount }} commits in total",
+        badge: "badge_3",
         amount: 0,
         next: 0
     },
@@ -63,6 +69,7 @@ export let achievements: Achievement[] = [
     {
         title: "Committed Developer",
         description: "Have created {{ amount }} commits in a single repository",
+        badge: "badge_3",
         amount: 0,
         next: 0
     },
@@ -70,6 +77,7 @@ export let achievements: Achievement[] = [
     {
         title: "Repository Explorer",
         description: "Have contributed to {{ amount }} repositories",
+        badge: "badge_4",
         amount: 0,
         next: 0
     },
@@ -77,6 +85,7 @@ export let achievements: Achievement[] = [
     {
         title: "Influencer",
         description: "Have {{ amount }} contributions in total",
+        badge: "badge_5",
         amount: 0,
         next: 0
     }
