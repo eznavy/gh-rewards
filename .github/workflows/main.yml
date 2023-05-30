@@ -28,7 +28,9 @@ jobs:
       run: npm run build
 
     - name: Run
-      run: npm start
+      run: |
+        set -e
+        npm start
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
