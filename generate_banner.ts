@@ -68,9 +68,9 @@ export function generateBanner() {
         let achievement_string = achievement_template;
         if(achievement.amount !== 0) {
             achievementCount++;
-            achievement_string = achievement_string.replace(/{{ badge_src }}/g, `../assets/${achievement.badge}.png`);
+            achievement_string = achievement_string.replace(/{{ badge_src }}/g, `https://raw.githubusercontent.com/eznavy/gh-rewards/master/assets/${achievement.badge}.png`);
             let roman_numeral = roman_numerals[milestones.indexOf(achievement.amount)];
-            achievement_string = achievement_string.replace(/{{ milestone_src }}/g, `../assets/${roman_numeral.toLowerCase()}.png`);
+            achievement_string = achievement_string.replace(/{{ milestone_src }}/g, `https://raw.githubusercontent.com/eznavy/gh-rewards/master/assets/${roman_numeral.toLowerCase()}.png`);
             achievement_string = achievement_string.replace(/{{ achievement_title }}/g, `${achievement.title} ${roman_numeral}`);
             achievement_string = achievement_string.replace(/{{ achievement_description }}/g, achievement.description.replace(/{{ amount }}/g, achievement.amount.toString()));
             achievement_string = achievement_string.replace(/{{ achievement_next }}/g, achievement.next.toString());
