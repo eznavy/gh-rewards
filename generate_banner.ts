@@ -1,13 +1,14 @@
 import {achievements} from "./types";
 import {Achievement} from "./types";
 import {dataOfInterest} from "./github_rewards";
+import * as fs from "fs";
 
 let achievement_template = `
       <div class="grid-item">
         <div class="split-container">
           <div class="split-left">
-            <img class="split-image" src="{{ badge_src }}" alt="{{ achievement_title }}" />
-            <img class="split-image number" src="{{ milestone_src }}" alt="{{ achievement_milestone }}" />
+            {{ badge }}
+            {{ milestone }}
           </div>
           <div class="split-right">
             <span class="achievement_title">{{ achievement_title }}</span>
@@ -24,7 +25,7 @@ let milestones: number[] = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
 /**
  * Replace the placeholders in the banner template with the correct values using regex.
  */
-export function generateBanner() {
+export async function generateBanner() {
     console.log("Generating banner...")
     let banner = require("fs").readFileSync("./templates/overview.svg", "utf8");
     let base_height = 350;
@@ -64,26 +65,31 @@ export function generateBanner() {
     let allAchievements = "";
     let achievementCount = 0;
     let roman_numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-    achievements.forEach((achievement: Achievement) => {
+    for(const achievement of achievements) {
         let achievement_string = achievement_template;
         if(achievement.amount !== 0) {
             achievementCount++;
-            achievement_string = achievement_string.replace(/{{ badge_src }}/g, `https://raw.githubusercontent.com/eznavy/gh-rewards/master/assets/${achievement.badge}.png`);
+            //write the badge and milestone svgs to the banner
+            let content = await fs.promises.readFile(`./assets/${achievement.badge}.svg`, "utf8");
+            achievement_string = achievement_string.replace(/{{ badge }}/g, content);
+
             let roman_numeral = roman_numerals[milestones.indexOf(achievement.amount)];
-            achievement_string = achievement_string.replace(/{{ milestone_src }}/g, `https://raw.githubusercontent.com/eznavy/gh-rewards/master/assets/${roman_numeral.toLowerCase()}.png`);
+            content = await fs.promises.readFile(`./assets/${roman_numeral.toLowerCase()}.svg`, "utf8");
+            achievement_string = achievement_string.replace(/{{ milestone }}/g, content);
+
             achievement_string = achievement_string.replace(/{{ achievement_title }}/g, `${achievement.title} ${roman_numeral}`);
             achievement_string = achievement_string.replace(/{{ achievement_description }}/g, achievement.description.replace(/{{ amount }}/g, achievement.amount.toString()));
             achievement_string = achievement_string.replace(/{{ achievement_next }}/g, achievement.next.toString());
             allAchievements += achievement_string;
         }
-    });
+    }
     banner = banner.replace(/{{ achievements }}/g, allAchievements);
     let final_height = base_height; //0, 1, 2 = 350; 3, 4: 525; 5, 6: 700; 7, 8: 875;
     if(achievementCount !== 0) final_height += (Math.floor((achievementCount + 1) / 2) - 1) * 175;
 
     banner = banner.replace(/{{ height }}/g, `${final_height}`);
 
-    require("fs").writeFileSync("./generated/overview.svg", banner);
+    fs.writeFileSync("./generated/overview.svg", banner);
 }
 
 function setAmountAndNext(achievement: Achievement, amount: number) {

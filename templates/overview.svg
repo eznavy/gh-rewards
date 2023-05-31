@@ -100,7 +100,7 @@
     padding-bottom: 10px;
     }
 
-    .number {
+    .numeral {
       position: absolute;
     }
 
