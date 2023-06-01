@@ -7,6 +7,10 @@ This project uses [GitHub Actions](https://github.com/features/actions) to gener
 The achievements are calculated based on your GitHub contributions and are updated daily. 
 The data is fetched from the [GitHub GraphQL API](https://docs.github.com/en/graphql) using a personal access token.
 
+## Disclaimer
+The current implementation is not optimal, as the used queries only allow to fetch the public repositories contributed to within the last year. However, the contributions fetched for each of the found repositories are not restricted to one year. The achievements therefore cover some of the past contributions, but not all.
+In addition, a dark mode version of the banner is currently missing.
+
 ## What data is used?
 The following data is used to calculate the achievements:
 - username
@@ -32,7 +36,9 @@ As by now, the default settings are:
 1. Create a copy of this repository by clicking [here](https://github.com/eznavy/gh-rewards/generate).
 2. Go to the "Secrets" section in the Settings of your new repository.
 3. Create a new secret with the name `ACCESS_TOKEN` and store your personal access token as the value.
-4. tba
+4. You can now manually start the workflow in the "Actions" section of your repository to generate the achievement banner. The job will also run automatically at 12pm every 24 hours.
+5. To showcase the banner in your GitHub profile, add the following link to your [profile README](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme): \
+`![](https://raw.githubusercontent.com/eznavy/gh-rewards/master/generated/overview.svg)`
 
 
 ## Related Projects
