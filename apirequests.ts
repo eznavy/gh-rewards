@@ -4,7 +4,7 @@ import {dataOfInterest} from "./github_rewards";
 
 const {graphql} = require("@octokit/graphql");
 
-let queryPresets = {
+const queryPresets = {
     commitCount: `
         repository(owner: "OWNER_NAME", name: "REPO_NAME") {
             defaultBranchRef {
@@ -55,7 +55,7 @@ export async function repositoriesContributedTo() {
     let hasNextPage = false;
 
     do {
-        let query = `
+        const query = `
             query {
                 user(login: "${user}") {
                     repositoriesContributedTo(first: 100, includeUserRepositories: true, after: ${after}, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, PULL_REQUEST_REVIEW, REPOSITORY]) {
@@ -97,7 +97,7 @@ export async function repositoriesContributedTo() {
  * Get the total counts of commits, issues and pull requests of the user.
  */
 export async function getCounts() {
-    let countTypes = ["commit", "issue", "pullRequest"];
+    const countTypes = ["commit", "issue", "pullRequest"];
     let countPreset: string;
     for (const countType of countTypes) {
         let batchquery = `query {`;
@@ -132,7 +132,7 @@ export async function getCounts() {
             switch(countType) {
                 case "commit":
                     repos.forEach((repo: Repository) => {
-                        let count = result[repo.label!].defaultBranchRef.target.history.totalCount;
+                        const count = result[repo.label!].defaultBranchRef.target.history.totalCount;
                         if(count > max) max = count;
                         dataOfInterest.totalCommitCount += count;
                     });
@@ -140,7 +140,7 @@ export async function getCounts() {
                     break;
                 case "issue":
                     repos.forEach((repo: Repository) => {
-                        let count = result[repo.label!].issueCount;
+                        const count = result[repo.label!].issueCount;
                         if(count > max) max = count;
                         dataOfInterest.totalIssueCount += count;
                     });
@@ -148,7 +148,7 @@ export async function getCounts() {
                     break;
                 case "pullRequest":
                     repos.forEach((repo: Repository) => {
-                        let count = result[repo.label!].issueCount;
+                        const count = result[repo.label!].issueCount;
                         if(count > max) max = count;
                         dataOfInterest.totalPullRequestCount += count;
                     });
