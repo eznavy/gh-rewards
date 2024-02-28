@@ -8,7 +8,7 @@ The achievements are calculated based on your GitHub contributions and are updat
 The data is fetched from the [GitHub GraphQL API](https://docs.github.com/en/graphql) using a personal access token.
 
 ## Disclaimer
-The current implementation is not optimal, as the used queries only allow to fetch the public repositories contributed to within the last year. However, the contributions fetched for each of the found repositories are not restricted to one year. The achievements therefore cover some of the past contributions, but not all.
+The current implementation is not optimal, as the queries used only allow to fetch the public repositories contributed to within the last year. However, the contributions fetched for each of the found repositories are not restricted to one year. The achievements therefore cover some of the past contributions, but not all.
 In addition, a dark mode version of the banner is currently missing.
 
 ## What data is used?
